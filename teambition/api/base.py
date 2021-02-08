@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 
 class TeambitionAPI(object):
+    endpoint = 'api/'
 
     def __init__(self, client=None):
         self._client = client

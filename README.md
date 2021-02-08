@@ -20,19 +20,15 @@ Teambition Python API
 from __future__ import absolute_import, unicode_literals
 from teambition import Teambition
 
-client_key = 'Your client key'
-client_secret = 'You client secret'
-redirect_uri = 'http://localhost'
+app_id = 'Your app id'
+app_secret = 'You client secret'
+org_id = 'org_id'
 
 
-tb = Teambition(client_key, client_secret)
-
-# 获取授权地址
-url = tb.oauth.get_authorize_url(redirect_uri)
+tb = Teambition(app_id, app_secret,org_id)
 
 # 通过 code 获取 access_token
-
-tb.oauth.fetch_access_token('Your code')
+tb.oauth.fetch_access_token()
 
 # 其它操作
 ```

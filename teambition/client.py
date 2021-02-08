@@ -24,53 +24,18 @@ class Teambition(object):
     Teambition API 客户端
     """
 
-    API_BASE_URL = 'https://api.teambition.com/'
+    API_BASE_URL = 'https://open.teambition.com/'
 
-    # API endpoints
     oauth = api.OAuth()
-    """:doc:`oauth`"""
     projects = api.Projects()
-    """:doc:`projects`"""
     tasklists = api.Tasklists()
-    """:doc:`tasklists`"""
-    stages = api.Stages()
-    """:doc:`stages`"""
+    taskgroups = api.TaskGroups()
+    templates  = api.Templates()    
+    taskflows = api.TaskFlows()    
     tasks = api.Tasks()
-    """:doc:`tasks`"""
     users = api.Users()
-    """:doc:`users`"""
     organizations = api.Organizations()
-    """:doc:`organizations`"""
-    stagetemplates = api.StageTemplates()
-    """:doc:`stagetemplates`"""
-    teams = api.Teams()
-    """:doc:`teams`"""
-    subtasks = api.Subtasks()
-    """:doc:`subtasks`"""
-    messages = api.Messages()
-    """:doc:`messages`"""
-    posts = api.Posts()
-    """:doc:`posts`"""
-    collections = api.Collections()
-    """:doc:`collections`"""
-    works = api.Works()
-    """:doc:`works`"""
-    events = api.Events()
-    """:doc:`events`"""
-    tags = api.Tags()
-    """:doc:`tags`"""
-    objectlinks = api.ObjectLinks()
-    """:doc:`objectlinks`"""
-    activities = api.Activities()
-    """:doc:`activities`"""
-    webhooks = api.Webhooks()
-    """:doc:`webhooks`"""
-    bookkeepings = api.BookKeepings()
-    """:doc:`bookkeepings`"""
-    entrycategories = api.EntryCategories()
-    """doc:`entrycategories`"""
-    entries = api.Entries()
-    """:doc:`entries`"""
+    departments = api.Departments()
 
     def __new__(cls, *args, **kwargs):
         self = super(Teambition, cls).__new__(cls)
@@ -92,17 +57,18 @@ class Teambition(object):
                 setattr(self, name, tb_api)
         return self
 
-    def __init__(self, client_id, client_secret, access_token=None):
+    def __init__(self, app_id, app_secret, org_id=None):
         """
         初始化 Teambition API Client
 
-        :param client_id: 申请应用时分配的 client_id
-        :param client_secret: 申请应用时分配的 client_secret
-        :param access_token: 可选，access_token
+        :param app_id: 申请应用时分配的 app_id
+        :param app_secret: 申请应用时分配的 app_secret
+        :param org_id: 可选，org_id
         """
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self._access_token = access_token
+        self.app_id = app_id
+        self.app_secret = app_secret
+        self.org_id = org_id
+        self._access_token = None
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
@@ -128,9 +94,15 @@ class Teambition(object):
         if 'Content-Type' not in kwargs['headers']:
             kwargs['headers']['Content-Type'] = 'application/json'
         if 'Authorization' not in kwargs['headers']:
-            kwargs['headers']['Authorization'] = 'OAuth2 {0}'.format(
+            kwargs['headers']['Authorization'] = 'Bearer {0}'.format(
                 self.access_token
             )
+
+        if 'X-Tenant-Id' not in kwargs['headers']:
+            kwargs['headers']['X-Tenant-Id'] = self.org_id
+
+        if 'X-Tenant-Type' not in kwargs['headers']:
+            kwargs['headers']['X-Tenant-Type'] = "organization"
 
         res = requests.request(
             method=method,
