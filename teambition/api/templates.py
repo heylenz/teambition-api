@@ -8,7 +8,7 @@ from teambition.api.base import TeambitionAPI
 class Templates(TeambitionAPI):
     endpoint = 'api/template'
 
-    def get(self, templateId, projectId, name=None, type=None):
+    def get(self, projectId, name=None, type=None):
         """
         https://open.teambition.com/help/docs/5e3a2585328b9a001bb8255f
    

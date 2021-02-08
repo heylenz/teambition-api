@@ -35,7 +35,6 @@ class Teambition(object):
     tasks = api.Tasks()
     users = api.Users()
     organizations = api.Organizations()
-    departments = api.Departments()
 
     def __new__(cls, *args, **kwargs):
         self = super(Teambition, cls).__new__(cls)

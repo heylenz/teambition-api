@@ -7,7 +7,6 @@ from teambition.api.taskgroups import TaskGroups  # NOQA
 from teambition.api.tasks import Tasks  # NOQA
 from teambition.api.users import Users  # NOQA
 from teambition.api.organizations import Organizations  # NOQA
-from teambition.api.departments import Departments  # NOQA
 from teambition.api.templates import Templates  # NOQA
 from teambition.api.taskflows import TaskFlows  # NOQA
 
@@ -18,7 +17,6 @@ __all__ = [
     'Tasks',
     'Users',
     'Organizations',
-    'Departments',
     'TaskGroups'
     'Templates'
     'Taskflows'

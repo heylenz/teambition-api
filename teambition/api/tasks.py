@@ -87,7 +87,7 @@ class Tasks(TeambitionAPI):
     def update(self, operatorId, taskId, projectId=None, templateId=None, tasklistId=None,
                taskgroupId=None, content=None, statusId=None, executorId=None, startDate=None,
                dueDate=None, note=None, priority=None, visible=None,
-               parentTaskId=None, participants=None, customfields=None
+               parentTaskId=None, participants=None, customfields=None, tagIds=None
                ):
         """
         更新任务
@@ -113,7 +113,8 @@ class Tasks(TeambitionAPI):
             visible=visible,
             parentTaskId=parentTaskId,
             participants=participants,
-            customfields=customfields
+            customfields=customfields,
+            tagIds=tagIds
         )
         return self._post(
             '{}/update'.format(self.endpoint),
