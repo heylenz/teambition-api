@@ -139,3 +139,21 @@ class Tasks(TeambitionAPI):
         body = optionaldict(creatorId=creatorId,
                             taskId=taskId, linkId=linkId, linkType=linkType)
         return self._post('{}/links/add'.format(self.endpoint), data=body)
+    
+    def add_comment(self, creatorId, taskId, comment):
+        """创建任务评论
+
+        该接口用于创建任务评论。
+        https://open.teambition.com/help/docs/5f33928c519fd100160f50c9
+
+        Args:
+            creatorId ([type]): [description]
+            taskId ([type]): [description]
+            comment ([type]): [description]
+
+        Returns:
+            [type]: [description]
+        """
+        body = optionaldict(creatorId=creatorId,
+                            taskId=taskId, comment=comment)
+        return self._post('{}/comment/create'.format(self.endpoint), data=body)
