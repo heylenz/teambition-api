@@ -1,7 +1,8 @@
 # teambition-api
 Teambition Python API
+原来的 teambtion api 基本处于不能用的状态
 
-阅读文档：[http://teambition-api.readthedocs.org/zh_CN/latest/](http://teambition-api.readthedocs.org/zh_CN/latest/)
+根据 https://open.teambition.com/help/docs/5d89d63c8acc9d00143ac723进行简单的更新
 
 # 安装与升级
 
@@ -21,13 +22,13 @@ from __future__ import absolute_import, unicode_literals
 from teambition import Teambition
 
 app_id = 'Your app id'
-app_secret = 'You client secret'
-org_id = 'org_id'
+app_secret = 'You app secret'
+org_id = 'your org id'
 
 
 tb = Teambition(app_id, app_secret,org_id)
 
-# 通过 code 获取 access_token
+# 通过 获取 access token
 tb.oauth.fetch_access_token()
 
 # 其它操作
